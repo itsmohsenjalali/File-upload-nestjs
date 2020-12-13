@@ -15,7 +15,8 @@ export class UploadHandler implements ICommandHandler<UploadCommand> {
     const up = this.publisher.mergeObjectContext(
       await this.filerepository.fileUpload(file),
     );
-    up.uploadFile(file.filename)
+    console.log("In");
+    up.uploadFile()
     up.commit()
   }
 }

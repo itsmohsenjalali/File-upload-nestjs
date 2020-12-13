@@ -3,10 +3,19 @@ import { fileInterface } from './interfaces/file.interface';
 import { uploadedFile } from '../events/impl/file-uploaded.event';
 
 export class Filemodel extends AggregateRoot {
-  constructor(private readonly file: fileInterface) {
+  data: any;
+  constructor(private readonly id: string | undefined) {
     super();
   }
-  uploadFile(filename: string){
-    this.apply(new uploadedFile(filename))
+  setData(file:fileInterface){
+    console.log("in model set Data")
+    this.data = file;
+  }
+  uploadFile(){
+    console.log("in model uploadFile")
+    this.apply(new uploadedFile(this.data.filename))
+  }
+  getFile(){
+    this.apply(new )
   }
 }

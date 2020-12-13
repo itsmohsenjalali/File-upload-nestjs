@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-// import { File } from '../models/file.model';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { fileInterface } from '../models/interfaces/file.interface';
@@ -10,9 +9,11 @@ export class FileRepository {
   constructor(
     @InjectModel('File') private readonly fileModel: Model<fileInterface>,
   ) {}
-  async fileUpload(file: fileInterface): Promise<Filemodel>{
-    const newfile = new this.fileModel({ ...file });
-    await newfile.save()
-    return new Filemodel(newfile)
+  async fileUpload(file: fileInterface){
+    console.log("in repository")
+    const newfile = await this.fileModel.create({ ...file });
+    const fileRoot = new Filemodel(newfile.fieldname)
+    fileRoot.setData(file)
+    return fileRoot
   }
 }
